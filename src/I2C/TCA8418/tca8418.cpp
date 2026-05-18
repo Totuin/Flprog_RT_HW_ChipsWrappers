@@ -2,14 +2,30 @@
 
 FLProgTca8418::FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns)
 {
+  (void)rows;    //  not used, left for compatibility
+  (void)columns; //  not used, left for compatibility
   RT_HW_Base.i2cSetParam(_device, address, bus, RT_HW_I2C_SPEED);
-  privateCreate(rows, columns);
+  _status = FLPROG_NOT_REDY_STATUS;
+}
+
+FLProgTca8418::FLProgTca8418(uint8_t address, uint8_t bus, uint32_t speed)
+{
+  RT_HW_Base.i2cSetParam(_device, address, bus, speed);
+  _status = FLPROG_NOT_REDY_STATUS;
 }
 
 FLProgTca8418::FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns, uint8_t expander, uint8_t channel)
 {
+  (void)rows;    //  not used, left for compatibility
+  (void)columns; //  not used, left for compatibility
   RT_HW_Base.i2cSetParam(_device, address, bus, RT_HW_I2C_SPEED, expander, channel);
-  privateCreate(rows, columns);
+  _status = FLPROG_NOT_REDY_STATUS;
+}
+
+FLProgTca8418::FLProgTca8418(uint8_t address, uint8_t bus, uint32_t speed, uint8_t expander, uint8_t channel)
+{
+  RT_HW_Base.i2cSetParam(_device, address, bus, speed, expander, channel);
+  _status = FLPROG_NOT_REDY_STATUS;
 }
 
 void FLProgTca8418::setInterruptMode()
@@ -35,37 +51,6 @@ void FLProgTca8418::resetIntrruptMode()
   {
     _status = FLPROG_WAIT_I2C_DEVICE_INIT;
   }
-}
-
-void FLProgTca8418::setReqestPerion(uint32_t period)
-{
-  if (_reqestPeriod == period)
-  {
-    return;
-  }
-  _lastRequestTime = millis();
-  _reqestPeriod = period;
-}
-
-void FLProgTca8418::privateCreate(uint8_t rows, uint8_t columns)
-{
-  if (rows > 8)
-  {
-    _rows = 8;
-  }
-  else
-  {
-    _rows = rows;
-  }
-  if (columns > 10)
-  {
-    _columns = 10;
-  }
-  else
-  {
-    _columns = columns;
-  }
-  _status = FLPROG_NOT_REDY_STATUS;
 }
 
 uint8_t FLProgTca8418::getEvent()
@@ -112,36 +97,21 @@ void FLProgTca8418::init()
   writeRegister(FLPROG_TCA8418_REG_GPIO_INT_EN_1, 0xFF);
   writeRegister(FLPROG_TCA8418_REG_GPIO_INT_EN_2, 0xFF);
   writeRegister(FLPROG_TCA8418_REG_GPIO_INT_EN_3, 0xFF);
-
-  //  MATRIX
-  //  skip zero size matrix
-  if ((_rows != 0) && (_columns != 0))
+  uint8_t mask = 0x00;
+  for (int r = 0; r < 8; r++)
   {
-    uint8_t mask = 0x00;
-    for (int r = 0; r < _rows; r++)
-    {
-      mask <<= 1;
-      mask |= 1;
-    }
-    writeRegister(FLPROG_TCA8418_REG_KP_GPIO_1, mask);
-
-    mask = 0x00;
-    for (int c = 0; c < _columns && c < 8; c++)
-    {
-      mask <<= 1;
-      mask |= 1;
-    }
-    writeRegister(FLPROG_TCA8418_REG_KP_GPIO_2, mask);
-
-    if (_columns > 8)
-    {
-      if (_columns == 9)
-        mask = 0x01;
-      else
-        mask = 0x03;
-      writeRegister(FLPROG_TCA8418_REG_KP_GPIO_3, mask);
-    }
+    mask <<= 1;
+    mask |= 1;
   }
+  writeRegister(FLPROG_TCA8418_REG_KP_GPIO_1, mask);
+  mask = 0x00;
+  for (int c = 0; c < 10 && c < 8; c++)
+  {
+    mask <<= 1;
+    mask |= 1;
+  }
+  writeRegister(FLPROG_TCA8418_REG_KP_GPIO_2, mask);
+  writeRegister(FLPROG_TCA8418_REG_KP_GPIO_3, 0x03);
   flush();
   if (_isInterruptMode)
   {
@@ -199,6 +169,21 @@ void FLProgTca8418::privateReadData()
     return;
   }
   _buttons[row][col] = position;
+  if (position)
+  {
+    _pressetButtonsCount++;
+    _pressetButtonCol = col;
+    _pressetButtonRow = row;
+  }
+  else
+  {
+    _pressetButtonsCount--;
+    if (_pressetButtonsCount == 0)
+    {
+      _pressetButtonCol = 255;
+      _pressetButtonRow = 255;
+    }
+  }
 }
 
 bool FLProgTca8418::buttonState(uint8_t row, uint8_t col)

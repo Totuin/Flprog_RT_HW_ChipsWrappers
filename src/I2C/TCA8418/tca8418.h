@@ -104,31 +104,33 @@ enum
 class FLProgTca8418 : public AbstractI2CDevice
 {
 public:
-  FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns);
-  FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns, uint8_t expander, uint8_t channel);
+  FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns);                                    // -- Конструктор с указанием адреса, шины, количества строк и столбцов (устаревшее оставленно для совместимости)
+  FLProgTca8418(uint8_t address, uint8_t bus, uint32_t speed);                                                   // -- Конструктор с указанием адреса, шины и скорости I2C
+  FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns, uint8_t expander, uint8_t channel); // -- Конструктор с указанием адреса, шины, количества строк и столбцов, а также параметров расширителя и канала (устаревшее оставленно для совместимости)
+  FLProgTca8418(uint8_t address, uint8_t bus, uint32_t speed, uint8_t expander, uint8_t channel);                // -- Конструктор с указанием адреса, шины, скорости I2C, а также параметров расширителя и канала
   uint8_t flush();
   uint8_t getEvent();
   uint8_t available();
-  bool buttonState(uint8_t row, uint8_t column);
+  bool buttonState(uint8_t row, uint8_t column); // -- Получить состояние кнопки по ее позиции (строка и столбец)
   void setInterruptMode();
   void resetIntrruptMode();
   void interruptReadData();
 
-  
+  uint8_t lastPresetButtonRow() { return _pressetButtonRow; }       // -- Получить номер строки последней нажатой кнопки
+  uint8_t lastPresetButtonCol() { return _pressetButtonCol; }       // -- Получить номер столбца последней нажатой кнопки
+  uint8_t lastPresetButtonsCount() { return _pressetButtonsCount; } // -- Получить количество  нажатых кнопок
+  bool hasPresetButtons() { return _pressetButtonsCount > 0; }      // -- Проверить,  есть ли нажатые кнопки
 
 protected:
   void init();
-  void privateCreate(uint8_t rows, uint8_t columns);
-
   void workPool();
   void enableInterrupts();
   void disableInterrupts();
   void privateReadData();
 
- 
- 
-  uint8_t _rows;
-  uint8_t _columns;
   bool _buttons[8][10] = {false}; // Assuming maximum of 8 rows and 10 columns
   bool _isInterruptMode = false;
+  uint8_t _pressetButtonsCount = 0;
+  uint8_t _pressetButtonCol = 255;
+  uint8_t _pressetButtonRow = 255;
 };
