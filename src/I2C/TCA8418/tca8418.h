@@ -128,7 +128,7 @@ protected:
   void disableInterrupts();
   void privateReadData();
 
-  bool _buttons[8][10] = {false}; // Assuming maximum of 8 rows and 10 columns
+  bool _buttons[8][10] = {false};
   bool _isInterruptMode = false;
   uint8_t _pressetButtonsCount = 0;
   uint8_t _pressetButtonCol = 255;

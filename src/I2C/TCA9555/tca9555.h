@@ -18,9 +18,11 @@ public:
   FLProgTca9555(uint8_t address, uint8_t bus, uint8_t expander, uint8_t channel);                 //  -- Конструктор с указанием адреса, шины, а также параметров расширителя и канала (скорость I2C по умолчанию 800000)
   FLProgTca9555(uint8_t address, uint8_t bus, uint32_t speed, uint8_t expander, uint8_t channel); //  -- Конструктор с указанием адреса, шины, скорости I2C, а также параметров расширителя и канала
 
-  void pinMode(uint8_t pin, uint8_t mode); //  -- Установка режима работы пина (INPUT или OUTPUT)
-  void write(uint8_t pin, uint8_t value);  //  -- Запись значения на пин (0 или 1)
-  bool read(uint8_t pin);                  //  -- Чтение значения с пина (0 или 1)
+  void pinMode(uint8_t pin, uint8_t mode);                 //  -- Установка режима работы пина (INPUT или OUTPUT)
+  void setInvertInput(bool invert) { _invIn = invert; };   //  -- Установка инверсии для входов (true - инвертировать, false - не инвертировать)
+  void setInvertOutput(bool invert) { _invOut = invert; }; //  -- Установка инверсии для выходов (true - инвертировать, false - не инвертировать)
+  void write(uint8_t pin, bool value);                     //  -- Запись значения на пин
+  bool read(uint8_t pin);                                  //  -- Чтение значения с пина
 
 protected:
   virtual void init();
@@ -31,4 +33,6 @@ protected:
   bool _values[16] = {false};
   bool _hasOutputs = false;
   bool _hasInputs = false;
+  bool _invIn = false;
+  bool _invOut = false;
 };

@@ -77,18 +77,23 @@ void FLProgTca9555::privatePinMode(uint8_t pin, uint8_t mode)
   }
 }
 
-void FLProgTca9555::write(uint8_t pin, uint8_t value)
+void FLProgTca9555::write(uint8_t pin, bool value)
 {
   if (pin > 15)
   {
     return;
   }
-  if (_values[pin] == value)
+  bool temp = value;
+  if (_invOut)
+  {
+    temp = !temp;
+  }
+  if (_values[pin] == temp)
   {
     return;
   }
   _task.reset();
-  _values[pin] = value;
+  _values[pin] = temp;
 }
 
 bool FLProgTca9555::read(uint8_t pin)
@@ -97,7 +102,12 @@ bool FLProgTca9555::read(uint8_t pin)
   {
     return false;
   }
-  return _values[pin];
+  bool temp = _values[pin];
+  if (_invIn)
+  {
+    temp = !temp;
+  }
+  return temp;
 }
 
 void FLProgTca9555::workPool()
