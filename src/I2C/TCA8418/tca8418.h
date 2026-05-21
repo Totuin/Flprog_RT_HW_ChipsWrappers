@@ -101,7 +101,7 @@ enum
   FLPROG_TCA8418_COL9  // Pin ID for column 9
 };
 
-class FLProgTca8418 : public AbstractI2CDevice
+class FLProgTca8418 : public AbstractFLProgI2CDevice
 {
 public:
   FLProgTca8418(uint8_t address, uint8_t bus, uint8_t rows, uint8_t columns);                                    // -- Конструктор с указанием адреса, шины, количества строк и столбцов (устаревшее оставленно для совместимости)
@@ -120,6 +120,7 @@ public:
   uint8_t lastPresetButtonCol() { return _pressetButtonCol; }       // -- Получить номер столбца последней нажатой кнопки
   uint8_t lastPresetButtonsCount() { return _pressetButtonsCount; } // -- Получить количество  нажатых кнопок
   bool hasPresetButtons() { return _pressetButtonsCount > 0; }      // -- Проверить,  есть ли нажатые кнопки
+
 
 protected:
   void init();

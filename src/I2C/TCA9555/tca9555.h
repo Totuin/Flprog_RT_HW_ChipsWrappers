@@ -10,7 +10,7 @@
 #define FLPROG_TCA9555_CONFIGURATION_PORT_0 0x06   //  pinMode()
 #define FLPROG_TCA9555_CONFIGURATION_PORT_1 0x07   //
 
-class FLProgTca9555 : public AbstractI2CDevice
+class FLProgTca9555 : public AbstractFLProgI2CDevice
 {
 public:
   FLProgTca9555(uint8_t address, uint8_t bus);                                                    //  -- Конструктор с указанием адреса и шины (скорость I2C по умолчанию 800000)
@@ -23,6 +23,7 @@ public:
   void setInvertOutput(bool invert) { _invOut = invert; }; //  -- Установка инверсии для выходов (true - инвертировать, false - не инвертировать)
   void write(uint8_t pin, bool value);                     //  -- Запись значения на пин
   bool read(uint8_t pin);                                  //  -- Чтение значения с пина
+
 
 protected:
   virtual void init();

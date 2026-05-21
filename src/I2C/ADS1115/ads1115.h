@@ -13,14 +13,14 @@
 #define FLPROG_ADS1115_16_MEASUREMENT_RARE 1  //  -- Установка частоты измерений для ADS1115. 16 измерений в секунду
 #define FLPROG_ADS1115_32_MEASUREMENT_RARE 2  //  -- Установка частоты измерений для ADS1115. 32 измерения в секунду
 #define FLPROG_ADS1115_64_MEASUREMENT_RARE 3  //  -- Установка частоты измерений для ADS1115. 64 измерения в секунду
-#define FLPROG_ADS1115_128_MEASUREMENT_RARE 4 //  -- Установка частоты измерений для ADS1115. １２８ измерений в секунду
-#define FLPROG_ADS1115_250_MEASUREMENT_RARE 5 //  -- Установка частоты измерений для ADS１１１５. ２５０  измерений в секунду
+#define FLPROG_ADS1115_128_MEASUREMENT_RARE 4 //  -- Установка частоты измерений для ADS1115. 128 измерений в секунду
+#define FLPROG_ADS1115_250_MEASUREMENT_RARE 5 //  -- Установка частоты измерений для ADS1115. 250  измерений в секунду
 #define FLPROG_ADS1115_475_MEASUREMENT_RARE 6 //  -- Установка частоты измерений для ADS1115. 475 измерений в секунду
 #define FLPROG_ADS1115_860_MEASUREMENT_RARE 7 //  -- Установка частоты измерений для ADS1115. 860 измерений в секунду
 
 #define FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL 0  //  -- Установка канала измерения для ADS1115. Канал A0-A1
 #define FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL 1  //  -- Установка канала измерения для ADS1115. Канал A0-A3
-#define FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL 2  // -- Установка канала измерения для ADS1115. Канал A1-A3
+#define FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL 2  // --  Установка канала измерения для ADS1115. Канал A1-A3
 #define FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL 3  //  -- Установка канала измерения для ADS1115. Канал A2-A3
 #define FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL 4 //  -- Установка канала измерения для ADS1115. Канал A0-GND
 #define FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL 5 //  -- Установка канала измерения для ADS1115. Канал A1-GND
@@ -37,14 +37,14 @@ public:
   void setMeasurementRate(uint8_t rate) { _sensor.codeSPS = rate; };           //  -- Установка частоты измерений для ADS1115. Принимает одно из следующих значений: FLPROG_ADS1115_8_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_16_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_32_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_64_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_128_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_250_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_475_MEASUREMENTS_PER_SECOND, FLPROG_ADS1115_860_MEASUREMENTS_PER_SECOND
   void setMeasurementChannel(uint8_t channel) { _sensor.setPermit(channel); }; //  -- Установка канала измерения для ADS1115. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
 
-  int16_t getChanelADSValue(uint8_t channel) { return _sensor.meterVar[channel]; };                        //  -- Получение измеренного значения с канала ADS1115 в еденицах чипа. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
-  int16_t getChanelSysValue(uint8_t channel) { return _sensor.getVar_sys(getChanelADSValue(channel)); };   //  -- Получение измеренного значения с канала ADS1115 в еденицах системы. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
-  float getChanelVoltValue(uint8_t channel) { return _sensor.getVar_V(getChanelADSValue(channel)); };      //  -- Получение измеренного значения с канала ADS1115 в Вольтах. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
+  int16_t getChanelADSValue(uint8_t channel) { return _sensor.meterVar[channel]; };                         //  -- Получение измеренного значения с канала ADS1115 в еденицах чипа. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
+  int16_t getChanelSysValue(uint8_t channel) { return _sensor.getVar_sys(getChanelADSValue(channel)); };    //  -- Получение измеренного значения с канала ADS1115 в еденицах системы. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
+  float getChanelVoltValue(uint8_t channel) { return _sensor.getVar_V(getChanelADSValue(channel)); };       //  -- Получение измеренного значения с канала ADS1115 в Вольтах. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
   float getChanelMilliVoltValue(uint8_t channel) { return _sensor.getVar_mV(getChanelADSValue(channel)); }; //  -- Получение измеренного значения с канала ADS1115 в Милливольтах. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
 
 protected:
   void
-  init() {};
+  init() { _status = FLPROG_READY_STATUS; };
   void workPool();
 
   RT_HW_i2c_ADS1115 _sensor;

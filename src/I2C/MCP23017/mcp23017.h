@@ -15,7 +15,7 @@ public:
   bool read(uint8_t pin);                                         //  -- Чтение значения с пина
 
 protected:
-  virtual void init() {};
+  virtual void init() { _status = FLPROG_READY_STATUS; };
   virtual void workPool();
 
   RT_HW_i2c_MCP23017 _sensor;
