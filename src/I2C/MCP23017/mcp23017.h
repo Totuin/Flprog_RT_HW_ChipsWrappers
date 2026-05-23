@@ -2,7 +2,7 @@
 #include "flprogUtilites.h"
 #include "RT_HW_i2c_MCP23017.hpp"
 
-class FLProgMCP23017 : public AbstractI2CDevice
+class FLProgMCP23017 : public AbstractTaskDevice
 {
 public:
   FLProgMCP23017(uint8_t address, uint8_t bus, uint32_t speed = RT_HW_I2C_SPEED);                  // -- Конструктор с указанием адреса, шины и скорости I2C

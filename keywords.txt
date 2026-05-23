@@ -5,10 +5,16 @@
 # # Datatypes (KEYWORD1)
 #######################################
 FLProgADS1115	KEYWORD1
+FLProgAbstract74HC165	KEYWORD1
+FLProgAbstract74HC595	KEYWORD1
 FLProgMCP23017	KEYWORD1
 FLProgMCP4725	KEYWORD1
 FLProgPCF8574	KEYWORD1
 FLProgPCF8575	KEYWORD1
+FLProgSpi74HC165	KEYWORD1
+FLProgSpi74HC595	KEYWORD1
+FLProgSpn74HC165	KEYWORD1
+FLProgSpn74HC595	KEYWORD1
 FLProgTca8418	KEYWORD1
 FLProgTca9555	KEYWORD1
 
@@ -30,7 +36,11 @@ lastPresetButtonRow	KEYWORD2
 lastPresetButtonsCount	KEYWORD2
 pinMode	KEYWORD2
 read	KEYWORD2
+readBitOnChip	KEYWORD2
+readChipByte	KEYWORD2
 resetIntrruptMode	KEYWORD2
+setBitOrder	KEYWORD2
+setChipCount	KEYWORD2
 setInterruptMode	KEYWORD2
 setInvertInput	KEYWORD2
 setInvertOutput	KEYWORD2
@@ -39,7 +49,10 @@ setMeasurementChannel	KEYWORD2
 setMeasurementRate	KEYWORD2
 setMeasurementScale	KEYWORD2
 setValue	KEYWORD2
+workPool	KEYWORD2
 write	KEYWORD2
+writeBtiOnChip	KEYWORD2
+writeByte	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -2,7 +2,7 @@
 #include "flprogUtilites.h"
 #include "RT_HW_i2c_PCF8575.hpp"
 
-class FLProgPCF8575 : public AbstractI2CDevice
+class FLProgPCF8575 : public AbstractTaskDevice
 {
 public:
   FLProgPCF8575(uint8_t address, uint8_t bus, uint32_t speed = RT_HW_I2C_SPEED);                  // -- Конструктор с указанием адреса, шины и скорости I2C

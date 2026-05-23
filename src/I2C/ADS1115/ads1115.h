@@ -27,7 +27,7 @@
 #define FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL 6 //  -- Установка канала измерения для ADS1115. Канал A2-GND
 #define FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL 7 //  -- Установка канала измерения для ADS1115. Канал A3-GND
 
-class FLProgADS1115 : public AbstractI2CDevice
+class FLProgADS1115 : public AbstractTaskDevice
 {
 public:
   FLProgADS1115(uint8_t address, uint8_t bus, uint32_t speed = RT_HW_I2C_SPEED);                  // -- Конструктор с указанием адреса, шины и скорости I2C
