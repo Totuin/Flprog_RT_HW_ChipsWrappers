@@ -112,6 +112,11 @@ bool FLProgTca9555::read(uint8_t pin)
 
 void FLProgTca9555::workPool()
 {
+  uint8_t taskRun = _task.run();
+  if (!taskRun)
+  {
+    return;
+  }
   if (_hasInputs)
   {
     uint8_t inRreg = readRegister(FLPROG_TCA9555_INPUT_PORT_REGISTER_0);
