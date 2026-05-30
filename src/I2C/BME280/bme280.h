@@ -12,6 +12,8 @@ public:
   float getPressure() { return _sensor.vPress; };   //  -- Получение текущего давления в гПа
   float getHumidity() { return _sensor.vHum; };     //  -- Получение текущей влажности в процентах
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();

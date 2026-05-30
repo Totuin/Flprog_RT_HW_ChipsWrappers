@@ -23,6 +23,8 @@ public:
   void timeEnd(uint32_t time) { _sensor.timeEnd = time; };                 // -- Установка времени окончания измерения
   int8_t numIRQ() { return _sensor.numIRQ; };                              // -- Получение номера прерывания
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void
   init() { _status = FLPROG_READY_STATUS; };

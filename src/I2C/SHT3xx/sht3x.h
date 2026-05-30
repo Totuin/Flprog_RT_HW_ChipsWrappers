@@ -11,6 +11,8 @@ public:
   float getTemperature() { return _sensor.vTemp; }; //  -- Получение текущей температуры в градусах Цельсия
   float getHumidity() { return _sensor.vHum; };     //  -- Получение текущей влажности в процентах
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();

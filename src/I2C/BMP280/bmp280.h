@@ -11,6 +11,8 @@ public:
   float getTemperature() { return _sensor.vTemp; }; //  -- Получение текущей температуры в градусах Цельсия
   float getPressure() { return _sensor.vPress; };   //  -- Получение текущего давления в гПа
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();

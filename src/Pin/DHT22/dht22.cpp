@@ -2,12 +2,17 @@
 
 FLProgDHT22::FLProgDHT22(uint8_t dataPin)
 {
-  _sensor.pin = dataPin;
-  _sensor.custom = 1;
+
+  _dataPin = dataPin;
 }
 
 void FLProgDHT22::workPool()
 {
+  if (_sensor.custom == 0)
+  {
+    _sensor.pin = _dataPin;
+    _sensor.custom = 1;
+  }
   uint8_t taskRun = _task.run();
   _sensor.direct(taskRun);
   _task.run(taskRun);

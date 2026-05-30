@@ -121,6 +121,7 @@ public:
   uint8_t lastPresetButtonsCount() { return _pressetButtonsCount; } // -- Получить количество  нажатых кнопок
   bool hasPresetButtons() { return _pressetButtonsCount > 0; }      // -- Проверить,  есть ли нажатые кнопки
 
+  bool getOk() { return true; };
 
 protected:
   void init();

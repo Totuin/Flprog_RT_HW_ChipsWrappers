@@ -10,9 +10,13 @@ public:
   float getTemperature() { return _sensor.vT / 10.0; }; //  -- Получение текущей температуры в градусах Цельсия
   float getHumidity() { return _sensor.vH / 10.0; };    //  -- Получение текущей влажности в процентах
 
+  bool getOk() { return _sensor.ok > 0; };
+  void setDataPin(uint8_t pin) { _dataPin = pin; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();
 
+  uint8_t _dataPin = 255;
   RT_HW_DHT22 _sensor;
 };

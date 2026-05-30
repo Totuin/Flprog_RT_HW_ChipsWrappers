@@ -11,6 +11,8 @@ public:
   void setValue(uint16_t value) { _sensor.extVar = value; };     //  -- Установка значения для MCP4725. Принимает значение от 0 до 4095
   void setIsSaveToEEPROM(bool save) { _sensor.vEEPROM = save; }; //  -- Установка флага сохранения значения в EEPROM (true - сохранять, false - не сохранять)
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();

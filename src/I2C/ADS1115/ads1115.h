@@ -42,9 +42,13 @@ public:
   float getChanelVoltValue(uint8_t channel) { return _sensor.getVar_V(getChanelADSValue(channel)); };       //  -- Получение измеренного значения с канала ADS1115 в Вольтах. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
   float getChanelMilliVoltValue(uint8_t channel) { return _sensor.getVar_mV(getChanelADSValue(channel)); }; //  -- Получение измеренного значения с канала ADS1115 в Милливольтах. Принимает одно из следующих значений: FLPROG_ADS1115_A0_A1_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_A3_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A0_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A1_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A2_GND_MEASUREMENT_CHANNEL, FLPROG_ADS1115_A3_GND_MEASUREMENT_CHANNEL
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
-  void
-  init() { _status = FLPROG_READY_STATUS; };
+  void init()
+  {
+    _status = FLPROG_READY_STATUS;
+  };
   void workPool();
 
   RT_HW_i2c_ADS1115 _sensor;

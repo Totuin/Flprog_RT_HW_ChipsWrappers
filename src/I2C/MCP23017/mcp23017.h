@@ -14,6 +14,8 @@ public:
   void write(uint8_t pin, bool value);                            //  -- Запись значения на пин
   bool read(uint8_t pin);                                         //  -- Чтение значения с пина
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   virtual void init() { _status = FLPROG_READY_STATUS; };
   virtual void workPool();

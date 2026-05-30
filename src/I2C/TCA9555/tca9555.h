@@ -24,6 +24,7 @@ public:
   void write(uint8_t pin, bool value);                     //  -- Запись значения на пин
   bool read(uint8_t pin);                                  //  -- Чтение значения с пина
 
+  bool getOk() { return true; };
 
 protected:
   virtual void init();

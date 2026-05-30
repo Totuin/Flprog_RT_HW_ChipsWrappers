@@ -10,6 +10,8 @@ public:
 
   uint32_t getIlluminance() { return _sensor.vLux; }; //  -- Получение текущей освещенности в люксах
 
+  bool getOk() { return _sensor.ok > 0; };
+
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
   void workPool();

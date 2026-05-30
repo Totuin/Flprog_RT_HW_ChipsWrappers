@@ -10,6 +10,7 @@ public:
   void workPool();
   // float getTemperature() { return _sensor.vTemp; }; //  -- Получение текущей температуры в градусах Цельсия
   float getTemperature() { return 0.0; };
+  bool getOk() { return true; };
 
 protected:
   void init() { _status = FLPROG_READY_STATUS; };
@@ -25,6 +26,7 @@ public:
   void workPool();
   float getTemperature() { return 0.0; };
   // float getTemperature() { return _sensor.vTemp; }; //  -- Получение текущей температуры в градусах Цельсия
+  bool getOk() { return true; };
 
 protected:
   void init() { _status = FLPROG_READY_STATUS; };

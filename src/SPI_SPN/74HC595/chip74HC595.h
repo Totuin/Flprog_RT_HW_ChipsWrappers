@@ -28,6 +28,7 @@ public:
   FLProgSpi74HC595(uint8_t bus, uint8_t csPin, uint8_t pinOE, uint32_t speed = RT_HW_SPI_SPEED); // -- Конструктор с указанием шины, пина CS, пина OE и скорости SPI
 
   void workPool();
+  bool getOk() { return _sensor.ok > 0; };
 
 protected:
   uint32_t extVar() { return _sensor.extVar; };
@@ -43,6 +44,7 @@ public:
   FLProgSpn74HC595(uint8_t sckPin, uint8_t misoPin, uint8_t mosiPin, uint8_t csPin, uint8_t pinOE, uint8_t speed = 100); // -- Конструктор с указанием пинов SCK, MISO, MOSI, CS, OE и скорости SPN в процентах (10%-100% )
 
   void workPool();
+  bool getOk() { return _sensor.ok > 0; };
 
 protected:
   uint32_t extVar() { return _sensor.extVar; };
