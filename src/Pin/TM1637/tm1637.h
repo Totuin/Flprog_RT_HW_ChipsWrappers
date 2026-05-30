@@ -18,6 +18,8 @@ public:
   void setText(String text);                                                                    // -- Установка текста для отображения. Принимает строку текста.  Максимальная длина текста - 4 символа. Если текст меньше 4 символов, то свободные позиции будут заполнены пробелами.
 
   bool getOk() { return true; };
+  void setClkPin(uint8_t pin) { _clkPin = pin; };
+  void setDinPin(uint8_t pin) { _dioPin = pin; };
 
 protected:
   void init() { _status = FLPROG_READY_STATUS; };

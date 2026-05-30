@@ -16,6 +16,8 @@ public:
   uint16_t pool(uint16_t useBus);
   void parasitePower(bool value) ;
 
+
+
   bool getOk() { return _sensor.ok > 0; };
 
 protected:

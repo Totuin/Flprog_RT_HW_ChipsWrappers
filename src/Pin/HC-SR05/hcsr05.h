@@ -23,12 +23,17 @@ public:
   void timeEnd(uint32_t time) { _sensor.timeEnd = time; };                 // -- Установка времени окончания измерения
   int8_t numIRQ() { return _sensor.numIRQ; };                              // -- Получение номера прерывания
 
+  void setPinTrg(uint8_t pin) { _pinTrg = pin; };
+  void setPinEcho(uint8_t pin) { _pinEcho = pin; };
   bool getOk() { return _sensor.ok > 0; };
 
 protected:
   void
   init() { _status = FLPROG_READY_STATUS; };
   void workPool();
+
+  uint8_t _pinTrg = 255;
+  uint8_t _pinEcho = 255;
 
   RT_HW_SR05 _sensor;
 };
