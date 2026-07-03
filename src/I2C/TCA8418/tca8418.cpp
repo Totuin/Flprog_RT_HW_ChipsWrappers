@@ -76,10 +76,7 @@ uint8_t FLProgTca8418::flush()
 
 void FLProgTca8418::init()
 {
-  if (_status == FLPROG_READY_STATUS)
-  {
-    return;
-  }
+  RT_HW_Base.i2cInitDevice(_device);
   //  GPIO
   //  set default all GIO pins to INPUT
   writeRegister(FLPROG_TCA8418_REG_GPIO_DIR_1, 0x00);
